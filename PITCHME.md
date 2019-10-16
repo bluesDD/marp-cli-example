@@ -78,9 +78,9 @@ http://at-grandpa.hatenablog.jp/entry/2018/01/15/022136
 <br>
 
 
-## ServerspecのPython版
+## ・ServerspecのPython版
 
-## Ansible の機能や設定を使うことが可能
+## ・Ansible の機能や設定を使うことが可能
 
 ## [Testinfra](https://testinfra.readthedocs.io/en/latest/index.html)
 
