@@ -1,21 +1,19 @@
 ---
+
 marp: true
 title: Marp CLI example
 description: Hosting Marp slide deck on the web
-theme: uncover
+theme: gaia
 paginate: true
 _paginate: false
+
 ---
 
-![bg](./assets/gradient.jpg)
 
-# <!--fit--> Marp CLI example
+# <!--fit--> インフラテストを
+# <!--fit--> うまくやりたい:rotating_light:
 
-Hosting Marp slide deck on the web
 
-https://github.com/yhatt/marp-cli-example
-
-<style scoped>a { color: #eee; }</style>
 
 ---
 
@@ -23,8 +21,7 @@ https://github.com/yhatt/marp-cli-example
 
 ---
 
-![bg](#123)
-![](#fff)
+
 
 ##### <!--fit--> [@marp-team/marp-cli](https://github.com/marp-team/marp-cli) + [Netlify](https://www.netlify.com/) | [Now](https://zeit.co/now)
 
