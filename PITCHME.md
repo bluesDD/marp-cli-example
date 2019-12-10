@@ -10,79 +10,74 @@ _paginate: false
 ---
 
 
-# <!--fit--> インフラテストを
-# <!--fit--> うまくやりたい:rotating_light:
+# <!--fit--> Github Actionsで
+# <!--fit--> NuxtプロジェクトをS3へ自動デプロイする
+<br>
+<br>
 
+### 森 早人
 
 
 ---
 
-# 最近、"テスト"についてよく考える
-
-<br>
-
-### TDD、サバンナ、和田さん、、、
-<br>
-
-### ・・・インフラにもテストっていらないのかな？
+# 自己紹介 :tada:
 
 
----
-# 新基盤  :tada:
-<br>
+### 経歴  :book:
+- (2017) SIer にてCATVネットワークエンジニア
 
-## EC2インスタンスの構成管理にAnsible
-
-## ➡「Fail-Fast」思想
+### 最近ハマっているもの:boom:
+- Apex Legends
+- Echo show 5 いじり
 
 ---
 
-# 「Fail-Fast」思想
+#  Github Actionsって？ :eyes:
+<br>
+
+### -  Github 提供のCI/CDツール
+### -  GitHubから直接コードをビルド、テスト、デプロイ可能
+### -  使用可能OSはUbuntu、Windows、MacOS 
 
 <br>
 
-## サーバの状態を設定できなかった段階で実行が失敗する
-## = 成功したならば、宣言通りにサーバの状態がセットアップされていることが保証される
-(あれ、テストいらないんじゃ)
-
----
-
-# 不安をテストする
-<br>
-
-
-ーーーーーーーーーーーーーーーーーーーーーーーーーーーーー
-#### - 開発中に「うまく動作するのか？」という不安
-####  - => TDDで「不安のコントロール」をすることで解決
-ーーーーーーーーーーーーーーーーーーーーーーーーーーーーー
-
-<br>
-
-テスト駆動開発の勘違いを見直す : 圧倒亭グランパのブログ
-http://at-grandpa.hatenablog.jp/entry/2018/01/15/022136
-
-
----
-# サーバー構築での不安
-<br>
-
-## 1. Ansible での設定はうまくいってるか
-## 2. とんでもない勘違いをしてないか
-## 3. 完成をどう定義するか
-
+参考：https://github.co.jp/features/actions
 
 
 ---
 
-# Testinfa
+# 導入方法
+
 <br>
 
+1. レポジトリのルートディレクトリに`/.github/workflow` ディレクトリを作成する
+2. `/.github/workflow`配下に、actionsを定義したワークフローファイル(yml)を置く
 
-## ・ServerspecのPython版
-
-## ・Ansible の機能や設定を使うことが可能
-
-## [Testinfra](https://testinfra.readthedocs.io/en/latest/index.html)
+---
+```yaml
+name: Upload to S3
+on: # トリガーとなるアクションの名前。クーロンのように定期実行することも可能
+  push:
+    branches:
+      - master
+jobs: # 実行内容。
+  deploy:
+    name: Build & Deploy
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@master # masterブランチにチェックアウト
+      - uses: actions/setup-node@master # Node.jsの実行環境を用意
+        with:
+          node-version: 10.x
+      - run: npm install
+      - run: npm run build
+      - uses: actions/aws/cli@master # aws cliを使用
+        env:
+          AWS_ACCESS_KEY_ID: ${{ secrets.S3_ACCESS_KEY_ID }}
+          AWS_SECRET_ACCESS_KEY: ${{ secrets.S3_SECRET_ACCESS_KEY }}
+        with:
+          args: s3 sync dist/ s3://clagecloud-nuxt-project
+```
 
 ---
 
@@ -93,6 +88,6 @@ http://at-grandpa.hatenablog.jp/entry/2018/01/15/022136
 # まとめ
 <br>
 
-## インフラでも、
-## 不安なく構築をすすめるため、
-## テスト駆動開発するのもありかもしれない！
+## - サクッとCICDを導入できる
+## - 
+## - (高速化するために、キャッシュを使おう)
