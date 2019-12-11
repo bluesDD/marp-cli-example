@@ -46,7 +46,7 @@ _paginate: false
 
 ---
 
-# 導入方法
+# 導入方法 :tada:
 
 <br>
 
@@ -54,13 +54,14 @@ _paginate: false
 2. `/.github/workflow`配下に、actionsを定義したワークフローファイル(yml)を置く
 
 ---
-```yaml
+```yml
+## /.github/workflow/s3-deploy.yml
 name: Upload to S3
 on: # トリガーとなるアクションの名前。クーロンのように定期実行することも可能
   push:
     branches:
       - master
-jobs: # 実行内容。
+jobs: # 実行内容
   deploy:
     name: Build & Deploy
     runs-on: ubuntu-latest
@@ -81,7 +82,16 @@ jobs: # 実行内容。
 
 ---
 
-# Demo
+# Demo :corn:
+
+<br>
+
+### S3へ自動デプロイしてみる流れ :ec2:
+
+1. S3のバケットの作成
+2. IAMユーザーの作成
+3. シークレットを、Githubに登録
+4. ワークフローファイルを配置
 
 ---
 
@@ -90,4 +100,3 @@ jobs: # 実行内容。
 
 ## - サクッとCICDを導入できる
 ## - 
-## - (高速化するために、キャッシュを使おう)
